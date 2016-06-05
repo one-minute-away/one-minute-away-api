@@ -3,8 +3,11 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const Router = require('./route/user-routes');
+const bodyParser = require('body-parser').json();
 const morgan = require('morgan');
-const errorHandler = require('./lib/error_handling');
+const jwt = require('./lib/jwt');
+const errorHandler = require('./lib/error-handler');
 
 const dbPort = process.env.MONGODB_URI || 'mongodb://localhost/dev_db';
 console.log('dbPort', dbPort);
