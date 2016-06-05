@@ -1,5 +1,5 @@
 {
-  "name": "One Minute Away API",
+  "name": "one-minute-away-API",
   "version": "0.1.0",
   "description": "Get time based alerts for your predefined bus routes",
   "main": "index.js",

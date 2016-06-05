@@ -3,23 +3,19 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const Router = require('./route/user-routes');
 const bodyParser = require('body-parser').json();
 const morgan = require('morgan');
-const jwt = require('./lib/jwt');
 const errorHandler = require('./lib/error-handler');
 
-const dbPort = process.env.MONGODB_URI || 'mongodb://localhost/dev_db';
-console.log('dbPort', dbPort);
+const dbUrl = process.env.MONGODB_URI || 'mongodb://localhost/dev_db';
 
-mongoose.connect(dbPort);
+mongoose.connect(dbUrl);
 
-const iceCreamRouter = require('./route/icecream_routes');
-const milkShakeRouter = require('./route/milkshake_routes');
+const userRoutes = require('./route/user-routes');
+
 
 app.use(morgan('dev'));
-app.use('/icecream', iceCreamRouter);
-app.use('/milkshake', milkShakeRouter);
+app.use('/', userRoutes);
 
 app.use(errorHandler);
 
