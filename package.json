@@ -1,7 +1,7 @@
 {
-  "name": "rest_api",
+  "name": "One Minute Away API",
   "version": "0.1.0",
-  "description": "##To Submit this Assignment   * fork this repository   * write all of your code in a folder containing your name   * push to your repository   * submit a pull request to this repository   * submit a link to your PR in canvas",
+  "description": "Get time based alerts for your predefined bus routes",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha",
