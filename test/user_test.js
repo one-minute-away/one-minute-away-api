@@ -8,7 +8,7 @@ chai.use(chaiHTTP);
 const expect = chai.expect;
 const request = chai.request;
 const jwt = require('jsonwebtoken');
-const secret = process.env.SECRET || 'change me';
+const secret = process.env.SECRET || 'changeme';
 const dbPort = process.env.MONGOLAB_URI;
 
 process.env.MONGOLAB_URI = 'mongodb://localhost/test_db';
@@ -20,7 +20,9 @@ describe('User authorization should', () => {
   beforeEach((done) => {
     let newUser = new User({
       username: 'testuser',
-      password: '$2a$08$pMewnngJdnSYxMz6dVcl8.H6PSiCqGCEP8Gri5zA6asB/qChSFMHq'
+      password: '$2a$08$pMewnngJdnSYxMz6dVcl8.H6PSiCqGCEP8Gri5zA6asB/qChSFMHq',
+      phoneNumber: '555555555',
+      email: 'test@test.com'
     });
     newUser.save((err, user) => {
       testUser = user;
@@ -54,7 +56,9 @@ describe('User authorization should', () => {
       .set('Content-Type', 'application/json')
       .send({
         username: 'user',
-        password: 'password'
+        password: 'password',
+        phoneNumber: '555555555',
+        email: 'test@test.com'
       })
       .end((err, res) => {
         User.find({
