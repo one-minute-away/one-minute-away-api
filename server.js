@@ -13,9 +13,12 @@ mongoose.connect(dbUrl);
 
 const userRoutes = require('./route/user-routes');
 
+const alertRoutes = require('./route/alert_routes');
+
 
 app.use(morgan('dev'));
 app.use('/', userRoutes);
+app.use('/alert', alertRoutes);
 
 app.use(errorHandler);
 
