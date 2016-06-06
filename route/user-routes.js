@@ -4,8 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser').json();
 const User = require('../model/user');
 const basicHTTP = require('../lib/basic_auth');
-const routes = require("../model/user");
-const superuser = require('../lib/super_auth.js');
+// const superuser = require('../lib/super_auth.js');
 
 const router = module.exports = exports = express.Router();
 
@@ -15,7 +14,8 @@ router.post('/signup', bodyParser, (req, res, next) => {
   newUser.password = hashedPassword;
   req.body.password = null;
   User.findOne({username: req.body.username}, (err, user) => {
-    if (err || user) return next(new Error('Could not create user ' + err));
+    if (user) return next(new Error('User already exists' ));
+    if (err) return next(new Error(err));
     newUser.save((err, user) => {
       if (err) return next(new Error(err));
       res.json({token: user.generateToken()});
@@ -31,8 +31,8 @@ router.get('/signin', basicHTTP, (req, res, next) => {
   });
 });
 
-router.get('/:id/routes', basicHTTP, (req, res, next) => {
-  User.findOne({username: req.auth.username}, (err, user) => {
+router.get('/:username/routes', basicHTTP, (req, res, next) => {
+  User.findOne({username: req.params.username}, (err, user) => {
     if (err || !user) return next(new Error(err));
     res.json(user.routes);
   });

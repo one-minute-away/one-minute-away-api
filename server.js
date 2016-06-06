@@ -3,9 +3,10 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser').json();
+// const bodyParser = require('body-parser').json();
 const morgan = require('morgan');
 const errorHandler = require('./lib/error-handler');
+const twilioAlert = require('./lib/twilio-alert');
 
 const dbUrl = process.env.MONGODB_URI || 'mongodb://localhost/dev_db';
 
@@ -16,6 +17,8 @@ const userRoutes = require('./route/user-routes');
 
 app.use(morgan('dev'));
 app.use('/', userRoutes);
+
+app.use(twilioAlert.notifyOnAlertTimer);
 
 app.use(errorHandler);
 
