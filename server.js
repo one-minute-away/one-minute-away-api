@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 // const bodyParser = require('body-parser').json();
 const morgan = require('morgan');
 const errorHandler = require('./lib/error-handler');
-const twilioAlert = require('../lib/twilio-alert');
+const twilioAlert = require('./lib/twilio-alert');
 
 const dbUrl = process.env.MONGODB_URI || 'mongodb://localhost/dev_db';
 
