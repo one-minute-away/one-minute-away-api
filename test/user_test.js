@@ -70,4 +70,17 @@ describe('User authorization should', () => {
         });
       });
   });
+
+  it('should return routes that a user has saved to their profile', (done) => {
+    request('localhost:3000')
+    .get('/:id/routes')
+    .auth('testuser', 'testuser')
+    .end((err, res) => {
+      expect(err).to.eql(null);
+      expect(res.body.routes).to.eql(user.routes({
+        _id: testUser._id
+      }, secret));
+      done();
+    });
+  });
 });
