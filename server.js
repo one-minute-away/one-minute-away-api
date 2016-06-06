@@ -3,7 +3,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser').json();
+// const bodyParser = require('body-parser').json();
 const morgan = require('morgan');
 const errorHandler = require('./lib/error-handler');
 
