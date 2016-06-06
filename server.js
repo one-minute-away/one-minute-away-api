@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 // const bodyParser = require('body-parser').json();
 const morgan = require('morgan');
 const errorHandler = require('./lib/error-handler');
+const twilioAlert = require('../lib/twilio-alert');
 
 const dbUrl = process.env.MONGODB_URI || 'mongodb://localhost/dev_db';
 
@@ -19,6 +20,8 @@ const alertRoutes = require('./route/alert_routes');
 app.use(morgan('dev'));
 app.use('/', userRoutes);
 app.use('/alert', alertRoutes);
+
+app.use(twilioAlert.notifyOnAlertTimer);
 
 app.use(errorHandler);
 
