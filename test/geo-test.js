@@ -1,10 +1,7 @@
 'use strict';
 
 const chai = require('chai');
-// const chaiHTTP = require('chai-http');
-// chai.use(chaiHTTP);
 const expect = chai.expect;
-// const request = chai.request;
 const geocoder = require('./../lib/geocoder');
 
 describe('geocoder unit testing', () => {
