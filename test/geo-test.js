@@ -4,7 +4,7 @@ const chai = require('chai');
 const expect = chai.expect;
 const geocoder = require('./../lib/geocoder');
 
-describe('geocoder unit testing', () => {
+describe('Geocoder unit testing', () => {
   let sampleRequest = {params: {address: ''}};
   before((done) => {
     sampleRequest.params.address = '1020 University Street, Seattle, WA';

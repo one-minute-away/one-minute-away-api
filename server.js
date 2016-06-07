@@ -13,7 +13,7 @@ const dbUrl = process.env.MONGODB_URI || 'mongodb://localhost/dev_db';
 mongoose.connect(dbUrl);
 
 const userRoutes = require('./route/user-routes');
-const scheduleRoutes = require('./route/schedule-routes');
+const transitRoutes = require('./route/transit_routes');
 const alertRoutes = require('./route/alert_routes');
 const authRoutes = require('./route/auth_routes');
 
@@ -23,7 +23,7 @@ const authRoutes = require('./route/auth_routes');
 app.use('/', userRoutes);
 app.use('/', authRoutes);
 app.use('/alert', alertRoutes);
-app.use('/', scheduleRoutes);
+app.use('/transit', transitRoutes);
 app.use(twilioAlert.notifyOnAlertTimer);
 app.use(errorHandler);
 

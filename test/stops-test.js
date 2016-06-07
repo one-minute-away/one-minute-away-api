@@ -4,7 +4,7 @@ const chai = require('chai');
 const expect = chai.expect;
 const getStops = require('./../lib/get-stops');
 
-describe('get stops unit testing', () => {
+describe('Get stops unit testing', () => {
   let req = {};
   req.latLon =  {lat: 47.61156, lng: -122.327618};
   let sampleResponse = {};

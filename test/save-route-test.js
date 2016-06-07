@@ -14,7 +14,7 @@ process.env.MONGOLAB_URI = 'mongodb://localhost/test_db';
 
 require('../server');
 
-describe('route saving integration tests', () => {
+describe('Route saving integration tests', () => {
   let token = '';
   beforeEach((done) => {
     request('localhost:3000')

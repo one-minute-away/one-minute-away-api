@@ -9,10 +9,10 @@ const request = chai.request;
 
 require('./../server.js');
 
-describe('find-stops route', () => {
-  it('should return an array of stops with arrays of routes attached', (done) => {
+describe('Transit routes', () => {
+  it('/findstops should return an array of stops with arrays of routes attached', (done) => {
     request('localhost:3000')
-      .get('/findStops/1020+University+Street,+Seattle,+WA')
+      .get('/transit/findstops/1020+University+Street,+Seattle,+WA')
       .end((err, res) => {
         expect(err).to.eql(null);
         expect(res.body).to.be.an('array');
