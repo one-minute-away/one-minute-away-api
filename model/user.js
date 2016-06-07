@@ -5,15 +5,24 @@ const bcrypt = require('bcrypt');
 const secret = process.env.SECRET || 'changeme';
 const jwt = require('jsonwebtoken');
 
-//TODO add is superUser boolean 
+//TODO add is superUser boonlean
+
+const Route = new mongoose.Schema({
+  nickname: {type: String, required: true},
+  route_id: {type: String, required: true},
+  stop_id: {type: String, required: true},
+  hour: {type: Number, required: true},
+  minute: {type: Number, required: true}
+})
 
 const User = new mongoose.Schema({
   email: {type: String, required: true},
   username: {type: String, required: true},
   password: {type: String, required: true},
   phoneNumber: {type: String, required: true},
-  routes: {type: [], required: false}
+  routes: {type: [Route], required: false}
 });
+
 
 User.methods.hashPassword = function() {
   return bcrypt.hashSync(this.password, 8);
