@@ -52,9 +52,7 @@ describe('route saving integration tests', () => {
     .send({
       nickname: 'nickname',
       route_id: '1_00034',
-      stop_id: '1_02312',
-      hour: 8,
-      minute: 30
+      stop_id: '1_02312'
     })
     .end((err, res) => {
       if (err) console.log(err);
