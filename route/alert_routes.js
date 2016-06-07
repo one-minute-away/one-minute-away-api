@@ -16,6 +16,7 @@ router.post('/', bodyParser, jwtAuth, (req, res, next) => {
   });
 });
 
+//TODO ensure only user can get a list of their own routes
 router.get('/', jwtAuth, (req, res, next) => {
   Alert.find({}, (err, alerts) => {
     if (err) return next(err);
@@ -23,6 +24,8 @@ router.get('/', jwtAuth, (req, res, next) => {
   });
 });
 
+
+//TODO better error message
 router.use((req, res, next) => {
   let cbString = req._parsedUrl.path.split('/').pop();
   Alert.findOne({
