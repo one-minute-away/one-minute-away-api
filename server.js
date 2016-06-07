@@ -17,9 +17,6 @@ const scheduleRoutes = require('./route/schedule-routes');
 const alertRoutes = require('./route/alert_routes');
 
 
-app.use('/', (req, res) => {
-  res.status(200).json({message: 'welcome'});
-});
 
 app.use(morgan('dev'));
 app.use('/', userRoutes);
@@ -27,7 +24,6 @@ app.use('/alert', alertRoutes);
 app.use('/', scheduleRoutes);
 app.use(twilioAlert.notifyOnAlertTimer);
 app.use(errorHandler);
-
 
 
 app.use((req, res) => {
