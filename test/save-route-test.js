@@ -5,7 +5,7 @@ const chaiHTTP = require('chai-http');
 chai.use(chaiHTTP);
 const expect = chai.expect;
 const request = chai.request;
-const secret = process.env.SECRET || 'changeme';
+//const secret = process.env.SECRET || 'changeme';
 const dbPort = process.env.MONGOLAB_URI;
 const mongoose = require('mongoose');
 const User = require('../model/user');
@@ -31,7 +31,7 @@ describe('route saving integration tests', () => {
         // console.log('token', res.body.token);
         token = res.body.token;
         done();
-      })
+      });
   });
   afterEach((done) => {
     process.env.MONGOLAB_URI = dbPort;
@@ -40,10 +40,10 @@ describe('route saving integration tests', () => {
     });
   });
   it('our guy should be there', (done) => {
-    User.findOne({username: 'ZTestuser'}, (err, user) => {
+    User.findOne({username: 'ZTestuser'}, () => {
       done();
-    })
-  })
+    });
+  });
   it('should post our route to our user', (done) => {
     request('localhost:3000')
     .post('/alert/saveRoute')
@@ -65,6 +65,6 @@ describe('route saving integration tests', () => {
       expect(res.body.routes[0]).to.be.an('object');
       expect(res.body.routes[0].nickname).to.eql('nickname');
       done();
-    })
-  })
-})
+    });
+  });
+});

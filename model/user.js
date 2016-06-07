@@ -13,7 +13,7 @@ const Route = new mongoose.Schema({
   stop_id: {type: String, required: true},
   hour: {type: Number, required: true},
   minute: {type: Number, required: true}
-})
+});
 
 const User = new mongoose.Schema({
   email: {type: String, required: true},
