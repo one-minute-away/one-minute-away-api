@@ -26,6 +26,6 @@ describe('find-stops route', () => {
         expect(res.body[0].routeIds[0]).to.have.property('shortName');
         expect(res.body[0].routeIds[0]).to.have.property('description');
         done();
-      })
-  })
-})
+      });
+  });
+});
