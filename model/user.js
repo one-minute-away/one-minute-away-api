@@ -10,9 +10,7 @@ const jwt = require('jsonwebtoken');
 const Route = new mongoose.Schema({
   nickname: {type: String, required: true},
   route_id: {type: String, required: true},
-  stop_id: {type: String, required: true},
-  hour: {type: Number, required: true},
-  minute: {type: Number, required: true}
+  stop_id: {type: String, required: true}
 })
 
 const User = new mongoose.Schema({
