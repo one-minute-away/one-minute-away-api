@@ -9,4 +9,5 @@ const Router = module.exports = exports = express.Router();
 
 Router.get('/findStops/:address', geocoder, getStops, (req, res, next) => {
   res.json(req.stopsList);
+  next();
 });
