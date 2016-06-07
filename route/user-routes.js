@@ -38,10 +38,6 @@ router.get('/:id/routes', (req, res, next) => {
   });
 });
 
-
-//TODO route for user to save routes
-
-
 // router.get('/', jwt, superuser, (req, res, next) => {
 //   User.find({}, (err, user) => {
 //     If (err) return next(err);
