@@ -17,6 +17,7 @@ require('../server');
 
 describe('User authorization should', () => {
   let testUser;
+  let testUserId;
   beforeEach((done) => {
     let newUser = new User({
       username: 'testuser',
@@ -27,6 +28,8 @@ describe('User authorization should', () => {
     });
     newUser.save((err, user) => {
       testUser = user;
+      testUserId = user._id;
+      console.log('testUser', testUser, testUserId)
       done();
     });
   });
@@ -78,12 +81,12 @@ describe('User authorization should', () => {
 
   it('should return routes that a user has saved to their profile', (done) => {
     request('localhost:3000')
-    .get('/testuser/routes')
+    .get('/' + testUserId +'/routes')
     .auth('testuser', 'testuser')
     .end((err, res) => {
+      console.log('res.body', res.body);
       expect(err).to.eql(null);
       expect(res.body.routes).to.eql(testUser.routes);
-      console.log('tag', res.body);
       done();
     });
   });
