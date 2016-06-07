@@ -6,11 +6,11 @@ const User = require('../model/user');
 const Alert = require('../model/alert');
 const mongoose = require('mongoose');
 chai.use(chaiHTTP);
-const expect = chai.expect;
-const request = chai.request;
+//const expect = chai.expect;
+//const request = chai.request;
 const jwt = require('jsonwebtoken');
 const secret = process.env.SECRET || 'changeme';
-const dbPort = process.env.MONGOLAB_URI;
+//const dbPort = process.env.MONGOLAB_URI;
 
 process.env.MONGOLAB_URI = 'mongodb://localhost/test_db';
 
@@ -63,7 +63,7 @@ describe('Alerts should', () => {
     //     expect(err).to.eql(null);
     //     expect(res.body).to.have.property('_id');
     //     expect(res.body.cbString.length).to.above(10);
-      done();
+    done();
     //   });
   });
 
