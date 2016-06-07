@@ -2,6 +2,8 @@ const gulp = require('gulp');
 const eslint = require('gulp-eslint');
 const mocha = require('gulp-mocha');
 
+//TODO get file up and running 
+
 gulp.task('default', ['lint', 'test'], () => {
   console.log('started');
 });
@@ -17,4 +19,6 @@ gulp.task('test', () => {
   .pipe(mocha());
 });
 
+
+// TODO more explicit files to watch for better performance
 gulp.watch('./**/*.js', ['lint', 'test']);
