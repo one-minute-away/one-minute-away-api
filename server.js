@@ -18,6 +18,7 @@ const alertRoutes = require('./route/alert_routes');
 const authRoutes = require('./route/auth_routes');
 
 
+
 app.use(morgan('dev'));
 app.use('/', userRoutes);
 app.use('/', authRoutes);

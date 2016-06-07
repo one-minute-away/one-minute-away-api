@@ -1,9 +1,9 @@
 'use strict';
 const express = require('express');
-const bodyParser = require('body-parser').json();
+// const bodyParser = require('body-parser').json();
 const Alert = require('../model/alert');
 const User = require('../model/user');
-
+const router = module.exports = exports = express.Router();
 
 //TODO create callback url:
 //1 Get alarm_id from params
@@ -17,6 +17,7 @@ router.get('firealert', (req, res, next) => {
     User.find({_id: alert.userId}, (err, user) => {
       if (err) return next(err);
       // fire twilio
+      console.log(user);
     });
   });
 });
