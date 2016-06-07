@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const secret = process.env.SECRET || 'changeme';
 const jwt = require('jsonwebtoken');
 
-//TODO add is superUser boonlean 
+//TODO add is superUser boolean 
 
 const User = new mongoose.Schema({
   email: {type: String, required: true},

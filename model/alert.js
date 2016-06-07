@@ -30,7 +30,6 @@ Alert.post('save', true, function (next, done) {
 });
 
 Alert.pre('save', true, function (next, done) {
-  //TODO get stopSequence index and tripId and (vehicleId if easy) from onebusaway
   next();
   done();
 });
