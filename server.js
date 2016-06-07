@@ -15,11 +15,13 @@ mongoose.connect(dbUrl);
 const userRoutes = require('./route/user-routes');
 const scheduleRoutes = require('./route/schedule-routes');
 const alertRoutes = require('./route/alert_routes');
+const authRoutes = require('./route/auth_routes');
 
 
 
-app.use(morgan('dev'));
+//app.use(morgan('dev'));
 app.use('/', userRoutes);
+app.use('/', authRoutes);
 app.use('/alert', alertRoutes);
 app.use('/', scheduleRoutes);
 app.use(twilioAlert.notifyOnAlertTimer);
