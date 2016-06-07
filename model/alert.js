@@ -5,7 +5,7 @@ const randomString = require('../lib/randomstring')
 
 
 const Alert = new mongoose.Schema({
-  userid: {
+  userId: {
     type: String,
     required: true
   },
@@ -14,7 +14,10 @@ const Alert = new mongoose.Schema({
     type: Number,
     required: true
   },
-  routeId: String
+  routeId: {
+    type: String,
+    required: true
+  }
 });
 
 
