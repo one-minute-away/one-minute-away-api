@@ -10,7 +10,7 @@ const User = new mongoose.Schema({
   username: {type: String, required: true},
   password: {type: String, required: true},
   phoneNumber: {type: String, required: true},
-  routes: {type: {}, required: false}
+  routes: {type: [], required: false}
 });
 
 User.methods.hashPassword = function() {
