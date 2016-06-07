@@ -1,6 +1,6 @@
 'use strict';
 const mongoose = require('mongoose');
-const RegisterObaAlert = require('../lib/register-oba-alert');
+//const RegisterObaAlert = require('../lib/register-oba-alert');
 
 const Alert = new mongoose.Schema({
   userId: {
@@ -30,7 +30,6 @@ Alert.post('save', true, function (next, done) {
 });
 
 Alert.pre('save', true, function (next, done) {
-  //TODO get stopSequence index and tripId and (vehicleId if easy) from onebusaway
   next();
   done();
 });

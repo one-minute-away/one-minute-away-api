@@ -1,24 +1,34 @@
+'use strict';
+
 const gulp = require('gulp');
 const eslint = require('gulp-eslint');
 const mocha = require('gulp-mocha');
 
-//TODO get file up and running 
+var files = ['gulpfile.js', './lib/*.js', './model/*.js', './routes/*.js', './test/*.js',
+  '!node_modules/**', '!*.json'
+];
 
-gulp.task('default', ['lint', 'test'], () => {
-  console.log('started');
-});
+var testFiles = ['./test/*test.js'];
 
 gulp.task('lint', () => {
-  gulp.src('/server.js')
-  .pipe(eslint())
-  .pipe(eslint.format());
+  return gulp.src(files)
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 });
 
 gulp.task('test', () => {
-  gulp.src('test/*test.js')
-  .pipe(mocha());
+  return gulp.src(testFiles, {
+    read: false
+  })
+    .pipe(mocha({
+      reporter: 'nyan'
+    }));
 });
 
+gulp.task('watch', () => {
+  gulp.watch(files, ['lint', 'test']);
+});
 
-// TODO more explicit files to watch for better performance
-gulp.watch('./**/*.js', ['lint', 'test']);
+gulp.task('default', ['watch', 'lint', 'test'], () => {
+});

@@ -1,17 +1,19 @@
 language: node_js
 node_js:
-  - 4
+  - '4'
 services:
   - mongodb
 addons:
   apt:
     sources:
-    - mongodb-3.2.4-precise
+      - ubuntu-toolchain-r-test
     packages:
-    - mongodb-org-server
+      - gcc-4.8
+      - g++-4.8
+env:
+  - CXX=g++-4.8
 sudo: required
 before_script: npm install
 script:
   - npm run test
   - npm run lint
-##TODO get travis setup
