@@ -13,14 +13,14 @@ const dbUrl = process.env.MONGODB_URI || 'mongodb://localhost/dev_db';
 mongoose.connect(dbUrl);
 
 const userRoutes = require('./route/user-routes');
-
+const scheduleRoutes = require('./route/schedule-routes');
 const alertRoutes = require('./route/alert_routes');
 
 
 app.use(morgan('dev'));
 app.use('/', userRoutes);
 app.use('/alert', alertRoutes);
-
+app.use('/', scheduleRoutes);
 app.use(twilioAlert.notifyOnAlertTimer);
 
 app.use(errorHandler);
