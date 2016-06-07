@@ -29,7 +29,7 @@ describe('User authorization should', () => {
     newUser.save((err, user) => {
       testUser = user;
       testUserId = user._id;
-      console.log('testUser', testUser, testUserId)
+      console.log('testUser', testUser, testUserId);
       done();
     });
   });
@@ -86,7 +86,7 @@ describe('User authorization should', () => {
     .end((err, res) => {
       console.log('res.body', res.body);
       expect(err).to.eql(null);
-      expect(res.body.routes).to.eql(testUser.routes);
+      expect(res.body).to.eql(testUser.routes);
       done();
     });
   });
