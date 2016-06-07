@@ -1,31 +1,36 @@
 'use strict';
-
-//TODO after alert is created then call the function in ../lib/register-oba-alert
-// with correct argments
-
 const mongoose = require('mongoose');
-const randomString = require('../lib/randomstring')
-
+const RegisterObaAlert = require('../lib/register-oba-alert');
 
 const Alert = new mongoose.Schema({
   userId: {
     type: String,
     required: true
   },
-  cbString: String,
-  minutes: {
+  alermTimeOffset: {
     type: Number,
     required: true
   },
   routeId: {
     type: String,
     required: true
-  }
+  },
+  tripId: String,
+  stopSequence: Number,
+  fireDateTime: Date
+
 });
 
-//TODO delete, will use a central call back url and give oba callback and id
+Alert.post('save', true, function (next, done) {
+  //TODO after alert is created then call the function in ../lib/register-oba-alert
+  // with alet object as argments
+  //RegisterObaAlert(this);
+  next();
+  done();
+});
+
 Alert.pre('save', true, function (next, done) {
-  this.cbString = randomString(20)
+  //TODO get stopSequence index and tripId and (vehicleId if easy) from onebusaway
   next();
   done();
 });
