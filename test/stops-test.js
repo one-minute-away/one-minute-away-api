@@ -14,9 +14,10 @@ describe('get stops unit testing', () => {
     getStops(req, sampleResponse, done);
   });
   it('should have returned our stops object with routes objects attached', () => {
-    expect(sampleResponse.stopsList[0].routeIds[0]).to.have.property('shortName');
-    expect(sampleResponse.stopsList[1].routeIds[0]).to.have.property('longName');
-    expect(sampleResponse.stopsList[1].routeIds[0]).to.have.property('id');
-    expect(sampleResponse.stopsList[2].routeIds[0]).to.have.property('description');
+    console.log(req.stopsList);
+    expect(req.stopsList[0].routeIds[0]).to.have.property('shortName');
+    expect(req.stopsList[1].routeIds[0]).to.have.property('longName');
+    expect(req.stopsList[1].routeIds[0]).to.have.property('id');
+    expect(req.stopsList[2].routeIds[0]).to.have.property('description');
   });
 });
