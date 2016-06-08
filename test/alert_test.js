@@ -92,6 +92,5 @@ describe('Alerts should', () => {
         expect(res.body[0].alertTimeOffset).to.eql(42);
         done();
       });
-
   });
 });
