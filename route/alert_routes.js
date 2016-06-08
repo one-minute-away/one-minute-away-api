@@ -17,7 +17,7 @@ alertRouter.post('/', bodyParser, jwtAuth, getRoute, getArrivals, (req, res, nex
     tripId: req.tripId,
     stopSequence: req.stopSequence,
     serviceDate: req.serviceDate
-  }
+  };
   console.log(alertStuff);
   let newAlert = new Alert(alertStuff);
   newAlert.save((err, alert) => {

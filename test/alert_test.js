@@ -34,7 +34,7 @@ describe('Alerts should', () => {
       }, secret);
       User.findOne({_id: testUser._id}, (err, user) => {
         testUser.savedRouteId = user.routes[0]._id;
-      })
+      });
       let newAlert = new Alert({
         userId: testUser._id,
         alertTimeOffset: '42',
