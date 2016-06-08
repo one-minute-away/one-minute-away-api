@@ -12,8 +12,8 @@ const User = require('../model/user');
 const Alert = require('../model/alert');
 const mongoose = require('mongoose');
 chai.use(chaiHTTP);
-//const expect = chai.expect;
-//const request = chai.request;
+const expect = chai.expect;
+const request = chai.request;
 const jwt = require('jsonwebtoken');
 const secret = process.env.SECRET || 'changeme';
 //const dbPort = process.env.MONGOLAB_URI;
@@ -25,7 +25,6 @@ require('../server');
 describe('Alerts should', () => {
   let testUser;
   let token;
-  let testAlert;
   beforeEach((done) => {
     let newUser = new User({
       username: 'testuser',
@@ -39,17 +38,16 @@ describe('Alerts should', () => {
         _id: testUser._id
       }, secret);
       let newAlert = new Alert({
-        userId: 'testID',
-        alertTimeOffset: '2',
+        userId: testUser._id,
+        alertTimeOffset: '42',
         routeId: 'testID',
         tripId: 'test_trip_idd'
       });
-      newAlert.save((err, alert) => {
-        testAlert = alert;
+      newAlert.save((err) => {
+        if (err) return err;
         done();
       });
     });
-
   });
   afterEach((done) => {
     //process.env.MONGOLAB_URI = dbPort;
@@ -60,36 +58,40 @@ describe('Alerts should', () => {
 
   it('allow a user to create an alert', (done) => {
     request('localhost:3000')
-       .post('user/' + testUser._id + '/alert')
-       .send({
+      .post('/user/' + testUser._id + '/alert')
+      .send({
         alertTimeOffset: '42',
         routeId: 'test_route_id',
         userId: testUser._id,
         tripId: 'test_trip_id'
-       })
-       .set('token', token)
-       .end((err, res) => {
-         expect(err).to.eql(null);
-         expect(res.body).to.have.property('_id');
-         expect(res.body.alertTimeOut).to.eql(42);
-    done();
+      })
+      .set('token', token)
+      .end((err, res) => {
+        //console.log(res.body);
+        expect(err).to.eql(null);
+        expect(res.body).to.have.property('_id');
+        expect(res.body.alertTimeOffset).to.eql(42);
+        done();
+      });
   });
 
   it('allow a user to get a list of their alerts', (done) => {
     request('localhost:3000')
-       .post('user/' + testUser._id + '/alert')
-       .send({
-        alertTimeOut: '42',
-        routeId: 'test_route_id'
+      .get('/user/' + testUser._id + '/alert')
+      .set('token', token)
+      .send({
+        alertTimeOffset: '42',
+        routeId: 'test_route_id',
         userId: testUser._id,
         tripId: 'test_trip_idd'
-       })
-       .set('token', token)
-       .end((err, res) => {
-         expect(err).to.eql(null);
-         expect(res.body).to.have.property('_id');
-         expect(res.body.alertTimeOut).to.eql(42);
-    done();
-  });
+      })
+      .set('token', token)
+      .end((err, res) => {
+        expect(err).to.eql(null);
+        expect(res.body[0]).to.have.property('_id');
+        expect(res.body[0].alertTimeOffset).to.eql(42);
+        done();
+      });
 
+  });
 });

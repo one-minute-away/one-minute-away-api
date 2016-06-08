@@ -3,7 +3,7 @@ const express = require('express');
 // const bodyParser = require('body-parser').json();
 const Alert = require('../model/alert');
 const User = require('../model/user');
-const router = module.exports = exports = express.Router();
+const hooksRouter = module.exports = exports = express.Router();
 
 //TODO finish oba callback url:
 //1 Get alarm_id from params
