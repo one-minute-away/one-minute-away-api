@@ -17,10 +17,8 @@ const transitRoutes = require('./route/transit_routes');
 const alertRoutes = require('./route/alert_routes');
 const authRoutes = require('./route/auth_routes');
 
-
-
 //app.use(morgan('dev'));
-app.use('/', userRoutes);
+app.use('/user', userRoutes);
 app.use('/', authRoutes);
 app.use('/alert', alertRoutes);
 app.use('/transit', transitRoutes);
