@@ -52,14 +52,16 @@ describe('User routes', () => {
       });
   });
 
-  it ('should allow a user to save a new route' , (done) => {
+  it('should allow a user to save a new route' , (done) => {
     request('localhost:3000')
     .post('/' + testUserId + '/routes')
     .auth('testUser', 'testUser')
     .end((err, res) => {
-      expect(err)
-    })
-  })
+      expect(err).to.eql(null);
+      expect(res.body).to.eql(testuser.routes);
+      done();
+    });
+  });
 
 //TODO Test POST /user/:id/route - Create new route with auth
 //a form of this may exist in save-route.test that can be reused here
