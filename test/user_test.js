@@ -15,9 +15,9 @@ process.env.MONGOLAB_URI = 'mongodb://localhost/test_db';
 
 require('../server');
 
-describe('User authorization should', () => {
+describe('User routes', () => {
   let testUser;
-  let testUserId;
+  let token;
   beforeEach((done) => {
     let newUser = new User({
       username: 'testuser',
@@ -28,7 +28,9 @@ describe('User authorization should', () => {
     });
     newUser.save((err, user) => {
       testUser = user;
-      testUserId = user._id;
+      token = jwt.sign({
+        _id: testUser._id
+      }, secret);
       done();
     });
   });
@@ -39,53 +41,33 @@ describe('User authorization should', () => {
     });
   });
 
-  it('allow a known user to login and send a correct token', (done) => {
-
+  it('allow a user get their user info', (done) => {
     request('localhost:3000')
-      .get('/signin')
-      .auth('testuser', 'testuser')
+      .get('/user/' + testUser._id)
+      .set('token', token)
       .end((err, res) => {
         expect(err).to.eql(null);
-        expect(res.body.token).to.eql(jwt.sign({
-          _id: testUser._id
-        }, secret));
+        expect(res.body.username).to.eql('testuser');
+        expect(res.body.password).to.eql(null);
         done();
       });
   });
 
-  it('allow a new user to be created and send a token back', (done) => {
+  it('allow a user to DELETE themself', (done) => {
     request('localhost:3000')
-      .post('/signup')
-      .set('Content-Type', 'application/json')
-      .send({
-        username: 'user',
-        password: 'password',
-        phoneNumber: '555555555',
-        email: 'test@test.com'
-      })
+      .delete('/user/' + testUser._id)
+      .set('token', token)
       .end((err, res) => {
-        User.find({
-          username: 'user'
+        expect(err).to.eql(null);
+        expect(res.body.message).to.eql('successfully deleted');
+        User.findOne({
+          _id: testUser._id
         }, (err, user) => {
           if (err) return err;
-          expect(err).to.eql(null);
-          expect(res).to.have.status(200);
-          expect(res.body.token).to.eql(jwt.sign({
-            _id: user[0]._id
-          }, secret));
-          done();
+          if (user) new Error;
         });
-      });
-  });
 
-  it('should return routes that a user has saved to their profile', (done) => {
-    request('localhost:3000')
-    .get('/' + testUserId +'/routes')
-    .auth('testuser', 'testuser')
-    .end((err, res) => {
-      expect(err).to.eql(null);
-      expect(res.body).to.eql(testUser.routes);
-      done();
-    });
+        done();
+      });
   });
 });

@@ -14,7 +14,9 @@ process.env.MONGOLAB_URI = 'mongodb://localhost/test_db';
 
 require('../server');
 
-describe('route saving integration tests', () => {
+//TODO MOVE file to routes_test.js and create other test
+
+describe('Route saving integration tests', () => {
   let token = '';
   beforeEach((done) => {
     request('localhost:3000')
@@ -39,11 +41,10 @@ describe('route saving integration tests', () => {
       done();
     });
   });
-  it('our guy should be there', (done) => {
-    User.findOne({username: 'ZTestuser'}, () => {
-      done();
-    });
-  });
+
+
+
+  //TODO TEST GET /user/:id/route - List user’s routes with auth
   it('should post our route to our user', (done) => {
     request('localhost:3000')
     .post('/alert/saveRoute')
