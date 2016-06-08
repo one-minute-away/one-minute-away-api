@@ -17,6 +17,7 @@ require('../server');
 
 describe('User authorization should', () => {
   let testUser;
+  let token;
   beforeEach((done) => {
     let newUser = new User({
       username: 'testuser',
@@ -27,8 +28,11 @@ describe('User authorization should', () => {
     });
     newUser.save((err, user) => {
       testUser = user;
-      done();
+      token = token = jwt.sign({
+        _id: testUser._id
+      }, secret);
     });
+    done();
   });
   afterEach((done) => {
     process.env.MONGOLAB_URI = dbPort;
@@ -37,43 +41,32 @@ describe('User authorization should', () => {
     });
   });
 
-  it('allow a known user to login and send a correct token', (done) => {
-
+  it('allow a user get their user info', (done) => {
     request('localhost:3000')
-      .get('/signin')
-      .auth('testuser', 'testuser')
+      .get('/user/' + testUser._id)
+      .set('token', token)
       .end((err, res) => {
         expect(err).to.eql(null);
-        expect(res.body.token).to.eql(jwt.sign({
-          _id: testUser._id
-        }, secret));
+        expect(res.body.username).to.eql('testuser');
+        expect(res.body.password).to.eql('null');
         done();
       });
   });
 
-  it('allow a new user to be created and send a token back', (done) => {
+  it('allow a user get delete themself', (done) => {
     request('localhost:3000')
-      .post('/signup')
-      .set('Content-Type', 'application/json')
-      .send({
-        username: 'user',
-        password: 'password',
-        phoneNumber: '555555555',
-        email: 'test@test.com'
-      })
+      .delete('/user/' + testUser._id)
+      .set('token', token)
       .end((err, res) => {
-        User.find({
-          username: 'user'
+        expect(err).to.eql(null);
+        expect(res.body.message).to.eql('successfully deleted');
+        User.findOne({
+          _id: testUser._id
         }, (err, user) => {
           if (err) return err;
-          expect(err).to.eql(null);
-          expect(res).to.have.status(200);
-          expect(res.body.token).to.eql(jwt.sign({
-            _id: user[0]._id
-          }, secret));
-          done();
+          if (user) new Error;
         });
+        done();
       });
   });
-
 });
