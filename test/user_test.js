@@ -31,7 +31,7 @@ describe('User routes', () => {
       token = jwt.sign({
         _id: testUser._id
       }, secret);
-        done();
+      done();
     });
   });
   afterEach((done) => {
