@@ -1,9 +1,3 @@
-//TODO Test DELETE /user/:id Removes user with token auth!
-
-//TODO GET /user/:id/alert List users alert’s with token auth!
-
-//TODO POST /user/:id/alert creates alert with token auth!
-
 'use strict';
 
 const chai = require('chai');
@@ -29,7 +23,7 @@ describe('Alerts should', () => {
     let newUser = new User({
       username: 'testuser',
       password: '$2a$08$pMewnngJdnSYxMz6dVcl8.H6PSiCqGCEP8Gri5zA6asB/qChSFMHq',
-      phoneNumber: '555555555',
+      phoneNumber: '9196066201',
       email: 'test@test.com'
     });
     newUser.save((err, user) => {
