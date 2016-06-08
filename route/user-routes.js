@@ -13,8 +13,9 @@ const userRouter = module.exports = exports = express.Router();
 //TODO GET /user/:id send user info
 userRouter.get('/:id/', jwtAuth, (req, res, next) => {
   User.findOne({_id: req.params.id}, (err, user) => {
+    user.password = null;
     if (err || !user) return next(new Error(err));
-    res.json(user.routes);
+    res.json(user);
   });
 });
 
