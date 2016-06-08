@@ -11,6 +11,7 @@ const router = module.exports = exports = express.Router();
 //3 look up user
 //4 fire twilio
 
+//TODO put firealert function here
 router.get('firealert', (req, res, next) => {
   Alert.find({_id: req.param('alarm_id')}, (err, alert) => {
     if (err) return next(err);

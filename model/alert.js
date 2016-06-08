@@ -7,7 +7,7 @@ const Alert = new mongoose.Schema({
     type: String,
     required: true
   },
-  alermTimeOffset: {
+  alertTimeOffset: {
     type: Number,
     required: true
   },
@@ -21,17 +21,17 @@ const Alert = new mongoose.Schema({
 
 });
 
-Alert.post('save', true, function (next, done) {
-  //TODO after alert is created then call the function in ../lib/register-oba-alert
-  // with alet object as argments
-  //RegisterObaAlert(this);
-  next();
-  done();
-});
-
-Alert.pre('save', true, function (next, done) {
-  next();
-  done();
-});
+// Alert.post('save', true, function (next, done) {
+//   //TODO after alert is created then call the function in ../lib/register-oba-alert
+//   // with alet object as argments
+//   //RegisterObaAlert(this);
+//   next();
+//   done();
+// });
+//
+// Alert.pre('save', true, function (next, done) {
+//   next();
+//   done();
+// });
 
 module.exports = mongoose.model('alert', Alert);

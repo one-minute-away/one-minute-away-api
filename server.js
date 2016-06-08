@@ -20,7 +20,7 @@ const authRoutes = require('./route/auth_routes');
 //app.use(morgan('dev'));
 app.use('/user', userRoutes);
 app.use('/', authRoutes);
-app.use('/alert', alertRoutes);
+app.use('/user/:id/alert', alertRoutes);
 app.use('/transit', transitRoutes);
 //TODO not sure twilioAlert needs to be used by app
 app.use(twilioAlert.notifyOnAlertTimer);
