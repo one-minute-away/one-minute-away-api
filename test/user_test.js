@@ -15,7 +15,7 @@ process.env.MONGOLAB_URI = 'mongodb://localhost/test_db';
 
 require('../server');
 
-describe('User authorization should', () => {
+describe('User routes', () => {
   let testUser;
   let token;
   beforeEach((done) => {
@@ -28,11 +28,11 @@ describe('User authorization should', () => {
     });
     newUser.save((err, user) => {
       testUser = user;
-      token = token = jwt.sign({
+      token = jwt.sign({
         _id: testUser._id
       }, secret);
+        done();
     });
-    done();
   });
   afterEach((done) => {
     process.env.MONGOLAB_URI = dbPort;
@@ -48,12 +48,12 @@ describe('User authorization should', () => {
       .end((err, res) => {
         expect(err).to.eql(null);
         expect(res.body.username).to.eql('testuser');
-        expect(res.body.password).to.eql('null');
+        expect(res.body.password).to.eql(null);
         done();
       });
   });
 
-  it('allow a user get delete themself', (done) => {
+  it('allow a user to DELETE themself', (done) => {
     request('localhost:3000')
       .delete('/user/' + testUser._id)
       .set('token', token)
@@ -66,6 +66,7 @@ describe('User authorization should', () => {
           if (err) return err;
           if (user) new Error;
         });
+
         done();
       });
   });
