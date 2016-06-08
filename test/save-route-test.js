@@ -41,12 +41,10 @@ describe('Route saving integration tests', () => {
       done();
     });
   });
-  //TODO not sure we need to test our test!! Latte will fail if test is bad
-  it('our guy should be there', (done) => {
-    User.findOne({username: 'ZTestuser'}, () => {
-      done();
-    });
-  });
+
+
+
+  //TODO TEST GET /user/:id/route - List user’s routes with auth
   it('should post our route to our user', (done) => {
     request('localhost:3000')
     .post('/alert/saveRoute')
