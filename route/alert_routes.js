@@ -19,26 +19,7 @@ router.post('/', bodyParser, jwtAuth, (req, res, next) => {
 });
 
 // TODO route should be /user/:id/alert
-router.post('/user/:id/alert', bodyParser, jwtAuth, (req, res, next) => {
-  //let savedUser = req.user;
-  let savedUserName = req.user.username;
-  User.findOne({
-    username: savedUserName
-  })
-    .exec((err, user) => {
-      user.routes.push({
-        nickname: req.body.nickname,
-        route_id: req.body.route_id,
-        stop_id: req.body.stop_id,
-        hour: req.body.hour,
-        minute: req.body.minute
-      });
-      user.save((err, user) => {
-        if (err) return next(new Error(err));
-        res.json(user);
-      });
-    });
-});
+
 
 //TODO finish /user/:id/alert (ensure only user can get a list of their own routes)
 router.get('/user/:id/alert', jwtAuth, (req, res, next) => {

@@ -16,12 +16,14 @@ const userRoutes = require('./route/user-routes');
 const transitRoutes = require('./route/transit_routes');
 const alertRoutes = require('./route/alert_routes');
 const authRoutes = require('./route/auth_routes');
+const routeRoutes = require('./route/route_routes');
 
 //app.use(morgan('dev'));
 app.use('/user', userRoutes);
 app.use('/', authRoutes);
 app.use('/alert', alertRoutes);
 app.use('/transit', transitRoutes);
+app.use('/user/:id/routes', routeRoutes);
 //TODO not sure twilioAlert needs to be used by app
 app.use(twilioAlert.notifyOnAlertTimer);
 app.use(errorHandler);
