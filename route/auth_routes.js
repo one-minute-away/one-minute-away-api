@@ -7,6 +7,7 @@ const basicHTTP = require('../lib/basic_auth');
 
 const authRouter = module.exports = exports = express.Router();
 
+
 authRouter.post('/signup', bodyParser, (req, res, next) => {
   let newUser = new User(req.body);
   let hashedPassword = newUser.hashPassword();

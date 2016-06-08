@@ -5,7 +5,7 @@ const Alert = require('../model/alert');
 const User = require('../model/user');
 const router = module.exports = exports = express.Router();
 
-//TODO create callback url:
+//TODO finish oba callback url:
 //1 Get alarm_id from params
 //2 Look up alert
 //3 look up user

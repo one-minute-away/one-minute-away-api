@@ -7,6 +7,8 @@ const User = require('../model/user');
 
 const router = module.exports = exports = express.Router();
 
+
+// TODO what is this and can it be deleted?
 router.post('/', bodyParser, jwtAuth, (req, res, next) => {
   req.body.userId = req.user._id;
   let newAlert = new Alert(req.body);
@@ -16,6 +18,7 @@ router.post('/', bodyParser, jwtAuth, (req, res, next) => {
   });
 });
 
+// TODO route should be /user/:id/alert
 router.post('/saveRoute', bodyParser, jwtAuth, (req, res, next) => {
   //let savedUser = req.user;
   let savedUserName = req.user.username;
@@ -37,22 +40,10 @@ router.post('/saveRoute', bodyParser, jwtAuth, (req, res, next) => {
     });
 });
 
-//TODO ensure only user can get a list of their own routes
+//TODO finish /user/:id/alert (ensure only user can get a list of their own routes)
 router.get('/', jwtAuth, (req, res, next) => {
   Alert.find({}, (err, alerts) => {
     if (err) return next(err);
     res.json(alerts);
-  });
-});
-
-//TODO better error message
-router.use((req, res, next) => {
-  let cbString = req._parsedUrl.path.split('/').pop();
-  Alert.findOne({
-    cbString: cbString
-  }, (err, obj) => {
-    if (err) return next(err);
-    if (obj === null) return next(Error('bad bad bad'));
-    res.json(obj);
   });
 });

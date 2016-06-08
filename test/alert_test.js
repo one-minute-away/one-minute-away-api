@@ -1,3 +1,16 @@
+
+
+//TODO Test DELETE /user/:id Removes user with token auth!
+
+//TODO GET /user/:id/alert List users alert’s with token auth!
+
+//TODO POST /user/:id/alert creates alert with token auth!
+
+
+
+
+
+
 // 'use strict';
 //
 // const chai = require('chai');
