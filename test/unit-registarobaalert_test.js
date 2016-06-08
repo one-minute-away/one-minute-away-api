@@ -21,6 +21,6 @@ describe('register alert unit test', () => {
     registerAlert(sampleRequest, sampleResponse, () => {
       expect(sampleRequest.alarmId).to.be.a('string');
       done();
-    })
-  })
-})
+    });
+  });
+});
