@@ -14,6 +14,8 @@ process.env.MONGOLAB_URI = 'mongodb://localhost/test_db';
 
 require('../server');
 
+//TODO MOVE file to routes_test.js and create other test
+
 describe('Route saving integration tests', () => {
   let token = '';
   beforeEach((done) => {
@@ -39,6 +41,7 @@ describe('Route saving integration tests', () => {
       done();
     });
   });
+  //TODO not sure we need to test our test!! Latte will fail if test is bad
   it('our guy should be there', (done) => {
     User.findOne({username: 'ZTestuser'}, () => {
       done();
