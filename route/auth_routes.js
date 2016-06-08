@@ -18,7 +18,10 @@ authRouter.post('/signup', bodyParser, (req, res, next) => {
     if (err) return next(new Error(err));
     newUser.save((err, user) => {
       if (err) return next(new Error(err));
-      res.json({token: user.generateToken()});
+      let obj = {};
+      obj.token =  user.generateToken();
+      obj.userId = user._id;
+      res.json(obj);
     });
   });
 });
@@ -27,6 +30,9 @@ authRouter.get('/signin', basicHTTP, (req, res, next) => {
   User.findOne({username: req.auth.username}, (err, user) => {
     if (err || !user) return next(new Error(err));
     if (!user.comparePassword(req.auth.password)) return next(new Error('Could not sign in'));
-    res.json({token: user.generateToken()});
+    let obj = {};
+    obj.token =  user.generateToken();
+    obj.userId = user._id;
+    res.json(obj);
   });
 });
