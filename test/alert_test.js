@@ -24,13 +24,17 @@ describe('Alerts should', () => {
       username: 'testuser',
       password: '$2a$08$pMewnngJdnSYxMz6dVcl8.H6PSiCqGCEP8Gri5zA6asB/qChSFMHq',
       phoneNumber: '9196066201',
-      email: 'test@test.com'
+      email: 'test@test.com',
+      routes: [{nickname: 'work to home', stop_id: '1_3036', route_id: '1_100089'}]
     });
     newUser.save((err, user) => {
       testUser = user;
       token = jwt.sign({
         _id: testUser._id
       }, secret);
+      User.findOne({_id: testUser._id}, (err, user) => {
+        testUser.savedRouteId = user.routes[0]._id;
+      })
       let newAlert = new Alert({
         userId: testUser._id,
         alertTimeOffset: '42',
@@ -54,17 +58,17 @@ describe('Alerts should', () => {
     request('localhost:3000')
       .post('/user/' + testUser._id + '/alert')
       .send({
-        alertTimeOffset: '42',
         routeId: 'test_route_id',
         userId: testUser._id,
-        tripId: 'test_trip_id'
+        savedRouteId: testUser.savedRouteId,
+        tripId: 'test_trip_id',
+        leadTime: 5
       })
       .set('token', token)
       .end((err, res) => {
-        //console.log(res.body);
         expect(err).to.eql(null);
         expect(res.body).to.have.property('_id');
-        expect(res.body.alertTimeOffset).to.eql(42);
+        expect(res.body.alertTimeOffset).to.eql(300);
         done();
       });
   });
