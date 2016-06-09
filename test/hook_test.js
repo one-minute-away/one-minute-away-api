@@ -21,9 +21,9 @@ describe('Firealert hook should', () => {
     let newUser = new User({
       username: 'testuser',
       password: '$2a$08$pMewnngJdnSYxMz6dVcl8.H6PSiCqGCEP8Gri5zA6asB/qChSFMHq',
-      //phoneNumber: '9196066201',
+      phoneNumber: '9196066201',
       //phoneNumber: '4259418692',
-      phoneNumber: '4052504941',
+      //phoneNumber: '4052504941',
       email: 'test@test.com'
     });
     newUser.save((err, user) => {
