@@ -10,7 +10,6 @@ const expect = chai.expect;
 const request = chai.request;
 const jwt = require('jsonwebtoken');
 const secret = process.env.SECRET || 'changeme';
-//const dbPort = process.env.MONGOLAB_URI;
 
 process.env.MONGOLAB_URI = 'mongodb://localhost/test_db';
 
@@ -48,7 +47,6 @@ describe('Alerts should', () => {
     });
   });
   afterEach((done) => {
-    //process.env.MONGOLAB_URI = dbPort;
     mongoose.connection.db.dropDatabase(() => {
       done();
     });
@@ -67,8 +65,8 @@ describe('Alerts should', () => {
       .set('token', token)
       .end((err, res) => {
         expect(err).to.eql(null);
-        expect(res.body).to.have.property('_id');
-        expect(res.body.alertTimeOffset).to.eql(300);
+        expect(res.status).to.eql(200);
+        expect((JSON.parse(res.res.body).code)).to.eql(200);
         done();
       });
   });
