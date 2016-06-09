@@ -3,10 +3,9 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-// const bodyParser = require('body-parser').json();
 //const morgan = require('morgan');
 const errorHandler = require('./lib/error-handler');
-const twilioAlert = require('./lib/twilio-alert');
+
 
 const dbUrl = process.env.MONGODB_URI || 'mongodb://localhost/dev_db';
 
@@ -27,8 +26,6 @@ app.use('/user/:id/alert', alertRoutes);
 app.use('/transit', transitRoutes);
 app.use('/hook', hookRoutes);
 app.use('/user/:id/routes', routeRoutes);
-//TODO not sure twilioAlert needs to be used by app
-app.use(twilioAlert.notifyOnAlertTimer);
 app.use(errorHandler);
 
 //TODO on / routes say res.json({message:'One Minute Away API V1'})

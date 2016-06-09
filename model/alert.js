@@ -17,7 +17,8 @@ const Alert = new mongoose.Schema({
   },
   tripId: String,
   stopSequence: Number,
-  fireDateTime: Date
+  fireDateTime: Date,
+  serviceDate: Date
 
 });
 
