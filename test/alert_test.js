@@ -83,7 +83,7 @@ describe('Alerts should', () => {
         userId: testUser._id,
         tripId: 'test_trip_idd'
       })
-      .set('token', token)
+      // .set('token', token)
       .end((err, res) => {
         expect(err).to.eql(null);
         expect(res.body[0]).to.have.property('_id');
