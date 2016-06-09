@@ -7,6 +7,8 @@ const twilio = require('../lib/twilio-client');
 
 
 hookRouter.get('/firealert', (req, res, next) => {
+  console.log(req.body);
+  console.log(req.query);
   Alert.findOne({
     _id: req.query['ALARM_ID']
   }, (err, alert) => {
