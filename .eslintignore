@@ -1,7 +1,7 @@
 **/node_modules/*
 **/vendor/*
 **/*.min.js
-/*.md
-/package.json
+*.md
+package.json
 Procfile
 npm-debug.log
