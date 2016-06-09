@@ -36,7 +36,6 @@ routeRouter.post('/', bodyParser, jwtAuth, (req, res, next) => {
 
 routeRouter.delete('/:id', jwtAuth, (req, res, next) => {
   let savedRouteId = req.params.id;
-  console.log(req.user);
   User.findOne({_id: req.user._id}, (err, user) => {
     if (!user.routes.id(savedRouteId) || err) return next(new Error(err));
     user.routes.id(savedRouteId).remove();

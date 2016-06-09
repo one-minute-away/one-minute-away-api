@@ -8,7 +8,7 @@ const getStops = require('./../lib/get-stops');
 
 const transitRouter = module.exports = exports = express.Router();
 
-transitRouter.get('/findstops/:address', geocoder, getStops, (req, res) => {
+transitRouter.get('/findstops/:address', geocoder, getStops, (req, res, next) => {
   res.json(req.stopsList);
-  //next();
+  // next();
 });

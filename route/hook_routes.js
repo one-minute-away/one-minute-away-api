@@ -10,14 +10,12 @@ hookRouter.get('/firealert', (req, res, next) => {
   Alert.findOne({
     _id: req.query['ALERT_ID']
   }, (err, alert) => {
-    console.log("alert", alert);
     if (err) return next(err);
     User.findOne({
       _id: alert.userId
     }, (err, user) => {
       if (err) return next(err);
       twilio.sendSms(user.phoneNumber, 'GO! your bus is so close!', (err, status) =>{
-        console.log('sending text');
         if (err) next(err);
         if (status) res.json({message:'alert fired'});
       });
