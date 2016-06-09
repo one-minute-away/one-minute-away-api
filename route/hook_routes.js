@@ -16,9 +16,11 @@ hookRouter.get('/firealert', (req, res, next) => {
       _id: alert.userId
     }, (err, user) => {
       if (err) return next(err);
-      console.log(user.phoneNumber);
-      twilio.sendSms(user.phoneNumber, 'hello');
+      twilio.sendSms(user.phoneNumber, 'hello', (err, status) =>{
+        if (err) next(err);
+        if (status) res.json({message:'alert fired'})
+        //console.log(status);
+      });
     });
   });
-  next();
 });
