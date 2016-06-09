@@ -43,6 +43,8 @@ POST json to /user/[user_id]/routes will save a route
 "stop_id":"1_9200"
 }
 ````
+returns list of routes and user object
+
 #### List routes
 GET request will return all routes a user has saved
 ```
@@ -58,3 +60,10 @@ routeId: 'dsauf89dsf70example'
 leadTime: '300'
 }
 ```
+#### Testing
+download ngrok and save to your project folder (it in git ignrore so don't worry)
+````
+./ngrok http 3000
+````
+````
+export CALLBACK_URL="[url from ngrok]/hook/firelart"
