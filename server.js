@@ -3,7 +3,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const morgan = require('morgan');
+//const morgan = require('morgan');
 const errorHandler = require('./lib/error-handler');
 
 
@@ -19,7 +19,7 @@ const hookRoutes = require('./route/hook_routes');
 const routeRoutes = require('./route/route_routes');
 
 
-app.use(morgan('dev'));
+//app.use(morgan('dev'));
 app.use('/user', userRoutes);
 app.use('/', authRoutes);
 app.use('/user/:id/alert', alertRoutes);
