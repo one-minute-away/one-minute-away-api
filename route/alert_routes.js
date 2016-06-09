@@ -32,9 +32,9 @@ alertRouter.post('/', bodyParser, jwtAuth, getRoute, getArrivals, (req, res, nex
       //'&vehicleId=' + alertObj.vehicleId +
       '&stopSequence=' + alertStuff.stopSequence +
       '&alarmTimeOffset=' + timeOffset +
-      '&url=' + process.env.CALLBACK_URL +
+      '&url=' + process.env.CALLBACK_URL + "/?ALERT_ID=" + alertStuff.id
       '&onArrival=true'
-      + '&alarm_id=' + alertStuff.id;
+      // + '&alarm_id=' + alertStuff.id;
       console.log(url);
       http.get(url, (response, err) => {
         var body = '';
