@@ -95,8 +95,8 @@ POST json to `/user/[user_id]/alert`
 with your route id and time in minutes
 ```
 {
-savedRouteId: 'dsauf89dsf70example'
-leadTime: '8'
+"savedRouteId": 'dsauf89dsf70example'
+"leadTime": '8'
 }
 ```
 ## Testing
