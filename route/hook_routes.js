@@ -18,8 +18,7 @@ hookRouter.get('/firealert', (req, res, next) => {
       if (err) return next(err);
       twilio.sendSms(user.phoneNumber, 'hello', (err, status) =>{
         if (err) next(err);
-        if (status) res.json({message:'alert fired'})
-        //console.log(status);
+        if (status) res.json({message:'alert fired'});
       });
     });
   });
