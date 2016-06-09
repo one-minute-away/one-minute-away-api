@@ -1,11 +1,12 @@
 {
-  "name": "rest_api",
+  "name": "one-minute-away-API",
   "version": "0.1.0",
-  "description": "##To Submit this Assignment   * fork this repository   * write all of your code in a folder containing your name   * push to your repository   * submit a pull request to this repository   * submit a link to your PR in canvas",
+  "description": "Get time based alerts for your predefined bus routes",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha",
-    "start": "node server.js"
+    "start": "node server.js",
+    "lint": "./node_modules/eslint/bin/eslint.js *"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   "devDependencies": {
     "chai": "3.5.0",
     "chai-http": "2.0.1",
+    "eslint": "^2.11.1",
     "gulp": "3.9.1",
     "gulp-eslint": "2.0.0",
     "gulp-mocha": "2.2.0",
@@ -28,9 +30,12 @@
     "mocha": "2.5.3"
   },
   "dependencies": {
+    "bcrypt": "^0.8.6",
     "body-parser": "1.15.1",
     "express": "4.13.4",
+    "jsonwebtoken": "^7.0.0",
     "mongoose": "4.4.19",
-    "morgan": "1.7.0"
+    "morgan": "1.7.0",
+    "twilio": "^2.9.1"
   }
 }
