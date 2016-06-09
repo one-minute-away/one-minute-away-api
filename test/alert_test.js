@@ -67,8 +67,8 @@ describe('Alerts should', () => {
       .set('token', token)
       .end((err, res) => {
         expect(err).to.eql(null);
-        expect(res.body).to.have.property('_id');
-        expect(res.body.alertTimeOffset).to.eql(300);
+        expect(res.status).to.eql(200);
+        expect((JSON.parse(res.res.body).code)).to.eql(200);
         done();
       });
   });
