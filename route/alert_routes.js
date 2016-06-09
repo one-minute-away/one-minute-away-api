@@ -35,7 +35,6 @@ alertRouter.post('/', bodyParser, jwtAuth, getRoute, getArrivals, (req, res, nex
       '&url=' + process.env.CALLBACK_URL + "/?ALERT_ID=" + alertStuff.id
       '&onArrival=true'
       // + '&alarm_id=' + alertStuff.id;
-      console.log(url);
       http.get(url, (response, err) => {
         var body = '';
         response.on('data', function (chunk) {

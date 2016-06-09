@@ -27,7 +27,6 @@ describe('User routes', () => {
       routes: []
     });
     newUser.save((err, user) => {
-      console.log(user);
       testUser = user;
       token = jwt.sign({
         _id: testUser._id
@@ -64,8 +63,6 @@ describe('User routes', () => {
     })
     .end((err, res) => {
       expect(err).to.eql(null);
-      console.log('damn it jeff', testUser);
-      console.log(res.body.routes);
       expect(res.body.routes[0].nickname).to.eql('testNickName');
       done();
     });
