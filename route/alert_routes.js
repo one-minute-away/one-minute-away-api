@@ -32,19 +32,17 @@ alertRouter.post('/', bodyParser, jwtAuth, getRoute, getArrivals, (req, res, nex
       //'&vehicleId=' + alertObj.vehicleId +
       '&stopSequence=' + alertStuff.stopSequence +
       '&alarmTimeOffset=' + timeOffset +
-      '&url=' + process.env.CALLBACK_URL + "/?ALERT_ID=" + alertStuff.id
-      '&onArrival=true'
-      // + '&alarm_id=' + alertStuff.id;
-      http.get(url, (response, err) => {
-        var body = '';
-        response.on('data', function (chunk) {
-          body += chunk;
-        });
-        response.on('end', function () {
-          if(err) return next(new Error(err));
-          res.json(body);
-        });
+      '&url=' + process.env.CALLBACK_URL + '/?ALERT_ID=' + alertStuff.id + '&onArrival=true';
+    http.get(url, (response, err) => {
+      var body = '';
+      response.on('data', function (chunk) {
+        body += chunk;
       });
+      response.on('end', function () {
+        if(err) return next(new Error(err));
+        res.json(body);
+      });
+    });
   });
 });
 

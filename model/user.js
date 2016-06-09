@@ -5,8 +5,6 @@ const bcrypt = require('bcrypt');
 const secret = process.env.SECRET || 'changeme';
 const jwt = require('jsonwebtoken');
 
-//TODO add is superUser boonlean
-
 const Route = new mongoose.Schema({
   nickname: {type: String, required: true},
   route_id: {type: String, required: true},
