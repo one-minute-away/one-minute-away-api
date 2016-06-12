@@ -6,8 +6,9 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const errorHandler = require('./lib/error-handler');
 
-
 const dbUrl = process.env.MONGODB_URI || 'mongodb://localhost/dev_db';
+console.log(dbUrl);
+
 
 mongoose.connect(dbUrl);
 

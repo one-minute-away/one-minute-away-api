@@ -11,6 +11,8 @@ hookRouter.get('/firealert', (req, res, next) => {
     _id: req.query['ALERT_ID']
   }, (err, alert) => {
     if (err) return next(err);
+    // alert.fireDateTime = Date;
+    // alert.save
     User.findOne({
       _id: alert.userId
     }, (err, user) => {

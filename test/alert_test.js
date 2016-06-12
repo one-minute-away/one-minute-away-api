@@ -11,7 +11,7 @@ const request = chai.request;
 const jwt = require('jsonwebtoken');
 const secret = process.env.SECRET || 'changeme';
 
-process.env.MONGOLAB_URI = 'mongodb://localhost/test_db';
+process.env.MONGODB_URI = 'mongodb://localhost/test_db';
 
 require('../server');
 
@@ -24,14 +24,20 @@ describe('Alerts should', () => {
       password: '$2a$08$pMewnngJdnSYxMz6dVcl8.H6PSiCqGCEP8Gri5zA6asB/qChSFMHq',
       phoneNumber: '9196066201',
       email: 'test@test.com',
-      routes: [{nickname: 'work to home', stop_id: '1_3036', route_id: '1_100089'}]
+      routes: [{
+        nickname: 'work to home',
+        stop_id: '1_3036',
+        route_id: '1_100089'
+      }]
     });
     newUser.save((err, user) => {
       testUser = user;
       token = jwt.sign({
         _id: testUser._id
       }, secret);
-      User.findOne({_id: testUser._id}, (err, user) => {
+      User.findOne({
+        _id: testUser._id
+      }, (err, user) => {
         testUser.savedRouteId = user.routes[0]._id;
       });
       let newAlert = new Alert({
@@ -47,9 +53,13 @@ describe('Alerts should', () => {
     });
   });
   afterEach((done) => {
-    mongoose.connection.db.dropDatabase(() => {
-      done();
+    mongoose.connect(process.env.MONGODB_URI, function () {
+      /* Drop the DB */
+      mongoose.connection.db.dropDatabase(() => {
+        done();
+      });
     });
+
   });
 
   it('allow a user to create an alert', (done) => {
@@ -66,7 +76,6 @@ describe('Alerts should', () => {
       .end((err, res) => {
         expect(err).to.eql(null);
         expect(res.status).to.eql(200);
-        expect((JSON.parse(res.res.body).code)).to.eql(200);
         done();
       });
   });
