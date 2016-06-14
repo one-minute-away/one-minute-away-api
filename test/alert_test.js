@@ -41,6 +41,8 @@ describe('Alerts should', () => {
         tripId: 'test_trip_idd'
       });
       newAlert.save((err) => {
+        //returning an err would cause the test to fail because timeout
+        //but wouldn't really show it. Throw the err instead.
         if (err) return err;
         done();
       });

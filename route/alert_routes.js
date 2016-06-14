@@ -24,11 +24,13 @@ alertRouter.post('/', bodyParser, jwtAuth, getRoute, getArrivals, (req, res, nex
   newAlert.save((err, alert) => {
     if (err) return next(err);
     alertStuff.id = alert._id;
+    //querystring! But cool assembling it like this!
     let url = 'http://api.pugetsound.onebusaway.org/api/where/register-alarm-for-arrival-and-departure-at-stop/' +
       alertStuff.stopId + '.json?' +
       'key=' + process.env.OBA_KEY +
       '&tripId=' + alertStuff.tripId +
       '&serviceDate=' + alertStuff.serviceDate +
+      //keep commented out code out of production
       //'&vehicleId=' + alertObj.vehicleId +
       '&stopSequence=' + alertStuff.stopSequence +
       '&alarmTimeOffset=' + timeOffset +

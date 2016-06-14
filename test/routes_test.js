@@ -21,6 +21,10 @@ describe('User routes', () => {
   beforeEach((done) => {
     let newUser = new User({
       username: 'testuser',
+      //I'm assuming this is a hashed password of some sort. It seems like this
+      //test isn't referencing the password anywhere. Generally I wouldn't do
+      //something like this if it wasn't strictly necessary. It could lead to
+      //confusion reading your code.
       password: '$2a$08$pMewnngJdnSYxMz6dVcl8.H6PSiCqGCEP8Gri5zA6asB/qChSFMHq',
       phoneNumber: '555555555',
       email: 'test@test.com',
