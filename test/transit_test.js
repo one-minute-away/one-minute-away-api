@@ -14,6 +14,8 @@ describe('Transit routes', () => {
     request('localhost:3000')
       .get('/transit/findstops/1020+University+Street,+Seattle,+WA')
       .end((err, res) => {
+        //very thorough! But you probably could have checked a few less
+        //props
         expect(err).to.eql(null);
         expect(res.body).to.be.an('array');
         expect(res.body[0]).to.be.an('object');

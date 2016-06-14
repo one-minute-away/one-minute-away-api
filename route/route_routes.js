@@ -15,11 +15,16 @@ routeRouter.get('/', jwtAuth, (req, res, next) => {
 });
 
 routeRouter.post('/', bodyParser, jwtAuth, (req, res, next) => {
+  //set to let username so you can...
   let savedUserName = req.user.username;
+  //...User.findOne({username})
   User.findOne({
     username: savedUserName
   })
     .exec((err, user) => {
+      //I think you could just push req.body here. Since you're only
+      //using it in this one place and responding afterwards you should
+      //be safe from reference problems.
       user.routes.push({
         nickname: req.body.nickname,
         route_id: req.body.route_id,
@@ -42,6 +47,7 @@ routeRouter.delete('/:id', jwtAuth, (req, res, next) => {
     user.save(function(err){
       if (err) return next(err);
     });
+    //same line
     if (err) return next(err);
     let message = 'successfully deleted';
     res.json({message});

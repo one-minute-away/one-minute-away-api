@@ -35,6 +35,7 @@ describe('User routes', () => {
     });
   });
   afterEach((done) => {
+    //I know this was in some in class, but it's actually unnecessary
     process.env.MONGOLAB_URI = dbPort;
     mongoose.connection.db.dropDatabase(() => {
       done();
@@ -63,10 +64,14 @@ describe('User routes', () => {
         User.findOne({
           _id: testUser._id
         }, (err, user) => {
+          //if you want mocha to know about an error you either have
+          //to check it with an expect or throw it.
           if (err) return err;
+          //the line below doesn't do anything
           if (user) new Error;
         });
-
+        //since this done is outside of your db call it's not waiting for
+        //it to come back. This test likely doesn't do anything.
         done();
       });
   });

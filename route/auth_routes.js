@@ -28,9 +28,16 @@ authRouter.post('/signup', bodyParser, (req, res, next) => {
 
 authRouter.get('/signin', basicHTTP, (req, res, next) => {
   User.findOne({username: req.auth.username}, (err, user) => {
+    //if you find yourself having to put just parens on the next line or have
+    //an exceptionally long line in a conditional just break it down to another
+    //line. You can still do a second line without the braces but using the
+    //braces on a conditional every once in a while isn't a terrible thing.
     if (err || !user) return next(new Error('user not found or error'
     ));
     if (!user.comparePassword(req.auth.password)) return next(new Error('Could not sign in'));
+    //for setting multiple fields I would just use an object literal.
+    //though you shouldn't need to send back the id. You can get it from
+    //the decoded token.
     let obj = {};
     obj.token =  user.generateToken();
     obj.userId = user._id;

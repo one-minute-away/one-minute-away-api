@@ -42,6 +42,7 @@ User are required for logging in, setting up routes and creating alerts
 
 #### New user
 Create a user by posting to the /signup route with a JSON object:
+<!-- commas! -->
 ```
 {
 "username":"exampleusername"

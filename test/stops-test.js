@@ -5,6 +5,8 @@ const expect = chai.expect;
 const getStops = require('./../lib/get-stops');
 
 describe('Get stops unit testing', () => {
+  //since there's only the one test I would have just done this in the
+  //test block itself rather than in a before.
   let req = {};
   req.latLon =  {lat: 47.61156, lng: -122.327618};
   let sampleResponse = {};
