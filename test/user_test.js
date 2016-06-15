@@ -62,12 +62,11 @@ describe('User routes', () => {
         expect(res.body.message).to.eql('successfully deleted');
         User.findOne({
           _id: testUser._id
-        }, (err, user) => {
+        }, (err) => {
           if (err) return err;
-          if (user) new Error;
+          expect(err).to.eql(null);
+          done();
         });
-
-        done();
       });
   });
 });
