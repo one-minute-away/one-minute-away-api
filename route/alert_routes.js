@@ -40,7 +40,7 @@ alertRouter.post('/', bodyParser, jwtAuth, getRoute, getArrivals, (req, res, nex
       });
       response.on('end', function () {
         if(err) return next(new Error(err));
-        res.json(body);
+        res.json({status:JSON.parse(body).code});
       });
     });
   });

@@ -9,9 +9,9 @@ const expect = chai.expect;
 const request = chai.request;
 const jwt = require('jsonwebtoken');
 const secret = process.env.SECRET || 'changeme';
-const dbPort = process.env.MONGOLAB_URI;
+//const dbPort = process.env.MONGOLAB_URI;
 
-process.env.MONGOLAB_URI = 'mongodb://localhost/test_db';
+process.env.MONGODB_URI = 'mongodb://localhost/test_db';
 
 require('../server');
 
@@ -35,9 +35,11 @@ describe('User routes', () => {
     });
   });
   afterEach((done) => {
-    process.env.MONGOLAB_URI = dbPort;
-    mongoose.connection.db.dropDatabase(() => {
-      done();
+    mongoose.connect(process.env.MONGODB_URI, function () {
+      /* Drop the DB */
+      mongoose.connection.db.dropDatabase(() => {
+        done();
+      });
     });
   });
 

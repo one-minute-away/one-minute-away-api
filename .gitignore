@@ -2,3 +2,4 @@ node_modules/
 db/
 npm-debug.log
 ngrok
+.DS_Store
