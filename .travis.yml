@@ -1,19 +1,24 @@
 language: node_js
 node_js:
-  - '4'
+- '4'
 services:
-  - mongodb
+- mongodb
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r-test
     packages:
-      - gcc-4.8
-      - g++-4.8
+    - gcc-4.8
+    - g++-4.8
 env:
+  matrix:
   - CXX=g++-4.8
-sudo: required
+  sudo: required
+  global:
+  - secure: dnY8MKBcMuvAy5gJtWjL3MEYO3ONxKwVaX45GXgdlY3WLR8CU/wmp7KJCN5dN7HG/ZdmuHEGjnOfaZ3Eo4X3O6ewfCo1thm0d6EIGIP9CsAf+BsgxN+PYVM/i2y3k6YB9Yrn7571qiGYprEHRiKJtU3I3w9MoswyDzwjbrCgGvBkhEIdLY+AA3omXycxVhTRiCVtZUoDfUulJRa2JWju//qqAyDgvtpaAU71ccIU3n3XwlMdTgisgsQG9wnsm6Y5ZxaK4HXvHCw1d5n/Tn5tGq+sp57mIv8QGk2ntxLQyzN9W9eR+toKm9fFCn17m/myMS3hencI7MpXWx1eh1NzB7h+7LXh704u7Bt1Hkq3MgKdprOicMx+bXqAMM7FKRkGPuRcJgTkDbnIt6obrwg0GLJQ+mw4yuEu26HiYL3sMznDmG2mF61P9VDoZXssS4FtG+QrPgch8Y/tNC2eZclv8uODBsF/S/UKL0aehNJvnZwUywoeWqmX+3gEAHg6GVvaEUJAlDN49O1ASwOezbNlyZEYpI3i84w7TPoDseC35um0DudnJZw9c/Hf5tiTh6moOAB3kCCd9C5p6pgd1bLISa9N6US6hyZu+ijnDpjvlb3/OEbKdU4nR1sEwIZSsBJMaJvhlNJbuyk7epwpRpce5oSeXYrRS6cydnfyVOZu7yQ=
+  - secure: d3qa8Ev+QnXammNxh3P4WCCg+sSi6ud593rFMpqucoswVzUT3vNhWcudQghf68Jc43ybcm9GeUqKkme8c0kXvhl7SKtvoX16t2tFXj5ick4ZUHes4L0JJQSpIar1XJCzB4Dg8jM0oSSX/3925Dzjj76d87Okm1W91BWe0+aV5XT7OCotPtzD17RcPx9GFebHiqQr2AOwnkY5H3nY+S/oxON85SR9xbBoaiZRCQkGyjusmgUHKooBs9wIR/IQcsXjpG7WN/IDGRW5wtrWh8m3OR6/eNeH9px+iz1bLqRUgT0STVPBssyMGwmTf9WysjkCSD+LyCL5rnQ/V1egcnqtHrjnVI44sclIax9RxS4S6m5mLZjWv/oaLRN0qhJtVkSDFmooatLFHpbt/aM3It2HeMztQ9wDw6n5e4gQWY7UA2B3UEADQF/8sqHIu+q/58GhZolmR2kaPV02kPN9RgSQpwBErG8cveleTTQAXDXUStYDPJIMfp0Y3ZqtoIXQvla7+bleGenCMilu4TKrfWVgE+IIA7scEzuNPda65P0WZ7OBxt67Yr+RB6wEmIjb1OcE760mR1bGzZnhG1+sai+jflJ/U1SW+M9etb0koLtnJPQhpPjK2uQNarmHKs16PJopVz0Kq2IneKA0aPKwPNGk8U1AWmCHazK1S4xbrzN1e7Q=
+  - secure: be4TFRXFczNDrJtf5vmkO+HDesuc0mmVODcnTCVil+3xW+zueJ7XtZ0IvIUxWU1kZ5cjK3bzzVQ/6XOxcQhhcekbio8N72j94Y3Xjil19yxrdpBMmAlRL5gwuMOOZemDRy6trg6DBNrWtLPCLaf2Y4ykC5DQKq+ZrUkiByJL3qX4wC8m2LpyOzZLhtQQGMRrUUEXtOCpL5MyYyIDejF6TOELK2BTQg1edG8YZfEb7eHHYCQCNpcBBxuNodYP2/XKAHh3Pw0pDBOmGIUBKNpvsbZcl72b1zS8X2K08yrbPpAFG2R3gc8QThGfgcqBAh62BVeB/LeR1FdYJyWJ908duI8CCQAaSJbNWqxRScU3hU8Zg00vumHvBGDpLMeTE4xy3WjZUGFRicbr/nTBwXjEHhJtLHzkSTKDpITgiXYa6OrmRpfQRLQarUhBWMhwDPMUVc+ah9KVkFXO3NaNOOlDS/gtpHMemgC/Mayt9xVbpFGbBvGjq6lElX/uy7Vb4BZqm2WX6KmIqNi1su0f2ZsSfMlDdzHdztPEGg4Lvu+Y58Hc9967cVLjMAGTwHaIuD4Zp93dekHJCMoQ/kbA1LHHexCkxW/2TPVQbEttwNhfU9jIIvqTK4N+SSlfOGgD8K1+ikOvlOT9ybAtwg/9wya4ZuA6uW9a5qJEnefdHKTeDHA=
 before_script: npm install
 script:
-  - npm run test
-  - npm run lint
+- npm run test
+- npm run lint
