@@ -10,7 +10,7 @@ const expect = chai.expect;
 const request = chai.request;
 
 
-process.env.MONGOLAB_URI = 'mongodb://localhost/test_db';
+process.env.MONGODB_URI = 'mongodb://localhost/test_db';
 
 require('../server');
 
@@ -21,7 +21,7 @@ describe('Firealert hook should', () => {
     let newUser = new User({
       username: 'testuser',
       password: '$2a$08$pMewnngJdnSYxMz6dVcl8.H6PSiCqGCEP8Gri5zA6asB/qChSFMHq',
-      phoneNumber: '9196066201',
+      phoneNumber: '14052504941',
       email: 'test@test.com'
     });
     newUser.save((err, user) => {
@@ -39,11 +39,13 @@ describe('Firealert hook should', () => {
     });
   });
   afterEach((done) => {
-    mongoose.connection.db.dropDatabase(() => {
-      done();
+    mongoose.connect(process.env.MONGODB_URI, function () {
+      /* Drop the DB */
+      mongoose.connection.db.dropDatabase(() => {
+        done();
+      });
     });
   });
-
 
   it('return an alert fired', (done) => {
     request('localhost:3000')
