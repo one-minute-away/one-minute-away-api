@@ -15,5 +15,5 @@ env:
 sudo: required
 before_script: npm install
 script:
-  - npm run test/user_test
+  - npm run test -- test/user_*.js
   - npm run lint
