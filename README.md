@@ -5,7 +5,7 @@ An api to get realtime sms alerts for the bus you want to catch. Setup a route, 
 
 
 ### Deploy
-Start by cloning the repo
+Start by cloning the repo 
 ```
 git clone git@github.com:one-minute-away/one-minute-away-api.git
 ```
